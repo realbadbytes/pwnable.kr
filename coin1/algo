@@ -1,0 +1,24 @@
+example N=200 C=8
+200 coins, 1 counterfeit, 8 chances to weigh
+good weight == 10, bad weight == 1
+therefore, bad half will be odd number
+binary search?
+
+            200
+
+        100     100
+       weigh  weigh(odd!)
+
+              50      50
+            weigh    weigh(odd!)
+
+                   25      25
+             weigh(odd!)   weigh
+             12     13
+          weigh(odd!)
+        etc
+
+base case? 
+there is only one element in an array and its weight is odd
+you have a 50/50 chance of picking the right index when at base case
+
