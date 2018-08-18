@@ -1,0 +1,74 @@
+unlink
+ssh unlink@pwnablekr -p2222 
+guest
+
+heap before unlink
++------------------------------
++------------------------------
++	OBJ A 24 bytes
++	*fd -> B
++	*bk -> uninitialized
++------------------------------
++------------------------------
++	OBJ B 24 bytes
++	*fd -> C
++	*bk -> A
++------------------------------
++------------------------------
++	OBJ C 24 bytes
++	*fd -> uninitialized
++	*bk -> B
++------------------------------
++------------------------------
+
+
+
+we then gets() into A->buf[8]
+
+
+
+heap after unlink(B)
++------------------------------
++------------------------------
++	OBJ A 24 bytes
++	*fd -> C
++	*bk -> uninitialized
++------------------------------
++------------------------------
++	OBJ B 24 bytes
++	still in heap but unlinked
++	*fd -> C
++	*bk -> A
++------------------------------
++------------------------------ 
++	OBJ C 24 bytes
++	*fd -> uninitialized
++	*bk -> A
++------------------------------
++------------------------------
+
+
+2 writes take place based on OBJ B members *fd and *bk
+these can be overwritten during gets(A->buf)
+attempt to overwrite ret on stack
+protections: no canary, no pie, no exec stack enabled
+rop ? magic gadget ?
+return into heap
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
